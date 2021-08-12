@@ -1,0 +1,44 @@
+{% extends "templates.html" %}
+{% block title %} XRay Classification{% endblock %}
+{% block nav %}
+  <button type="button" class="btn btn-primary largeBtn" onclick="window.location.href='/'">Prédiction</button>
+  <button type="button" class="btn btn-secondary largeBtn" onclick="window.location.href='/about'">A propos</button>
+{% endblock %}
+{% block content %}
+  <div class="col-4 container BlueWrapper d-block">
+    <h3>Effectuez votre Test</h3>
+    <div>
+    <img src="/static/wait.png" class="rounded mx-auto d-block" alt="..." height="50%" width="50%">
+      <p>Entrer Un dossier ou un fichier de données au format CSV ou XLS pour effectuez une prédiction sur vos données .</p>
+      <form class="form-signin" method=post enctype=multipart/form-data>
+        <div class="input-group">
+          <input type="file" name="files" class="form-control" id="inputfile" multiple required>
+        </div>
+        <button type="submit" class="btn btn-primary m-2">Prédire</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-4 container BlueWrapper d-block">
+  <h3>Résultat du Test</h3>
+    <div>
+      <img src="/static/load.gif" class="rounded mx-auto d-block mt-3" alt="..." height="90%" width="90%">
+      <p>Nous attendons vos données ... ! </p>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $('#inputfile').bind('change', function() {
+          let fileSize = this.files[0].size/1024/1024; // this gives in MB
+          if (fileSize > 1) {
+            $("#inputfile").val(null);
+            alert('file is too big. images more than 1MB are not allowed')
+            return
+          }
+
+          let ext = $('#inputfile').val().split('.').pop().toLowerCase();
+          if($.inArray(ext, ['jpg','jpeg']) == -1) {
+            $("#inputfile").val(null);
+            alert('only jpeg/jpg files are allowed!');
+          }
+      });
+    </script>
+{% endblock %}

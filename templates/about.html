@@ -1,0 +1,47 @@
+{% extends "templates.html" %}
+{% block title %} XRay Classification - about{% endblock %}
+{% block nav %}
+  <button type="button" class="btn btn-secondary largeBtn" onclick="window.location.href='/'">Prédiction</button>
+  <button type="button" class="btn btn-primary largeBtn" onclick="window.location.href='/about'">A propos</button>
+{% endblock %}
+{% block content %}
+  <div class="col-4 container BlueWrapper d-block">
+    <h3>A propos</h3>
+    <div>
+    <img src="/static/wait.png" class="rounded mx-auto d-block" alt="..." height="50%" width="50%">
+      <p><b>Ecole IA Microsoft By Simplon</b></p>
+      <p>Ce projet à était réalisés dans le cadre de la certification professionel de developpeur intelligence artificiel de l'école IA Microsoft de Nancy .</p>
+      <p>Ce projet à pour but d'integrer une évolution fonctionnelle et une amélioration du modèle d'intelligence artificielle.</p>
+    </div>
+  </div>
+  <div class="col-4 container BlueWrapper d-block">
+  <h3>Résultat du Test</h3>
+    <div>
+      <p>Modèle choisi : <b style="cursor:pointer;" onclick="window.open('https://github.com/apolanco3225/Medical-MNIST-Classification/blob/master/MedNIST.ipynb')">MedNet <i style="font-size:x-small;">By Nvidia</i></b></p>
+      <p class="text-justify w-75 m-auto"><i>Réseau de Deep Learning inspirée par l'alogithme de la société Nvidia dans le but d'aider la classification d'imagerie médical.</i><p>
+      <p style="text-align:left !important; text-decoration:underline;"><b>Hyperparametres :</b></p>
+      <table class="text-align-center w-75 m-auto">
+        <tr><td><i>Batch size</i> :  300</td><td><i>Learning Rate</i> :  0.03</td></tr>
+        <tr><td><i>t2vEpochs</i> :  30</td><td><i>t2vRatio</i>  : 1.3</td></tr>
+      </table>
+      <table class="table thead-dark mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Métrics</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Accuracy</td>
+            <td>99,81%</td>
+          </tr>
+          <tr>
+            <td>confusion Score</td>
+            <td>5729/5740</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "templates.html" %}
+{% block title %} XRay Classification{% endblock %}
+{% block nav %}
+  <button type="button" class="btn btn-primary largeBtn" onclick="window.location.href='/'">Prédiction</button>
+  <button type="button" class="btn btn-secondary largeBtn" onclick="window.location.href='/about'">A propos</button>
+{% endblock %}
+{% block content %}
+  <div class="col-4 container BlueWrapper d-block">
+    <h3>Effectuez votre Test</h3>
+    <div>
+    <img src="/static/wait.png" class="rounded mx-auto d-block" alt="..." height="50%" width="50%">
+      <p>Entrer Un dossier ou un fichier de données au format CSV ou XLS pour effectuez une prédiction sur vos données .</p>
+      <form class="form-signin" method=post enctype=multipart/form-data>
+        <div class="input-group">
+          <input type="file" name="files" class="form-control" id="inputfile" multiple required>
+        </div>
+        <button type="submit" class="btn btn-primary m-2">Prédire</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-4 container BlueWrapper d-block">
+  <h3>Résultat du Test</h3>
+    <div>
+      <p>Votre jeu de donnee <b>{{ data[0]["filename"] }}</b> à était testé</p>
+      <img src="/static/download.png" class="rounded mx-auto d-block" height="200px" width="200px" onclick="window.location.href='/download'">
+      <p>Les résultats sont : <p>
+      <table class="table thead-dark">
+        <thead>
+          <tr>
+            <th scope="col">Label</th>
+            <th scope="col">Nombres</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if data %}
+        {% for item in data %}
+          <tr>
+            <th scope="col">{{ item["result"]["class_name"] }}</th>
+            <th scope="col">{{ item["result"]["nbr"] }}</th>
+          </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $('#inputfile').bind('change', function() {
+          let fileSize = this.files[0].size/1024/1024; // this gives in MB
+          if (fileSize > 1) {
+            $("#inputfile").val(null);
+            alert('file is too big. images more than 1MB are not allowed')
+            return
+          }
+
+          let ext = $('#inputfile').val().split('.').pop().toLowerCase();
+          if($.inArray(ext, ['jpg','jpeg']) == -1) {
+            $("#inputfile").val(null);
+            alert('only jpeg/jpg files are allowed!');
+          }
+      });
+  </script>
+{% endblock %}

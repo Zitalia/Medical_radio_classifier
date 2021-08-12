@@ -1,0 +1,9 @@
+Flask
+torch
+torchvision
+numpy
+Pillow
+gunicorn
+onnx
+onnxruntime
+matplotlib
